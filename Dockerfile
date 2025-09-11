@@ -4,14 +4,15 @@ FROM node:18-alpine
 # Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+
+# Install git
+RUN apk add --no-cache git
+
+# Clone the repo (main branch) into /app
+RUN git clone --branch main https://github.com/kinabraytan/streams.git .
 
 # Install dependencies
 RUN npm install --production
-
-# Copy source code
-COPY . .
 
 # Expose port (default for Stremio add-ons is 7000, change if needed)
 EXPOSE 7000
