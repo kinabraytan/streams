@@ -22,7 +22,7 @@ function getStreams() {
 const manifest = {
     id: 'community.m3u8.streams',
     version: '1.0.0',
-    name: 'Live M3U8 Streams',
+    name: 'Kinabraytan Live M3U8 Streams',
     description: 'Auto-populated live streams from M3U8 playlist.',
     logo: 'https://i.imgur.com/LoQdSia.png',
     resources: ['catalog', 'stream', 'meta'],
