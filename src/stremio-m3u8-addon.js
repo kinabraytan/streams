@@ -30,7 +30,7 @@ const manifest = {
     catalogs: [{
         type: 'tv',
         id: 'm3u8-live',
-        name: 'Live TV',
+        name: 'A1X TV',
         extra: [{ name: 'search', isRequired: false }]
     }],
     idPrefixes: ['m3u8'],
