@@ -25,9 +25,40 @@ function parseM3U8(filePath) {
                 meta.tvgId = tvgIdMatch ? tvgIdMatch[1] : '';
                 meta.tvgName = tvgNameMatch ? tvgNameMatch[1] : name;
                 meta.tvgLogo = tvgLogoMatch ? tvgLogoMatch[1] : '';
-                // Resize imgur logos for better UI fit
-                if (meta.tvgLogo.includes('imgur.com')) {
-                    meta.tvgLogo += '?size=small';
+                // Normalize and resize Imgur logos for better UI fit.
+                // Imgur supports filename suffixes to return resized images (e.g. 's' for small square).
+                // Convert page links and non-raw imgur hosts to raw image host and add suffix before extension.
+                if (meta.tvgLogo && meta.tvgLogo.toLowerCase().includes('imgur.com')) {
+                    try {
+                        let url = meta.tvgLogo.trim();
+                        // Ensure protocol
+                        if (url.startsWith('//')) url = 'https:' + url;
+                        if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+                            if (!/imgur\.com\/(a|gallery)\//i.test(url)) {
+                                // Replace host with i.imgur.com (raw image host) for direct image access
+                                url = url.replace(/https?:\/\/((m|www)\.)?imgur\.com\//i, 'https://i.imgur.com/');
+                                // Add small square suffix before extension if possible
+                                const m = url.match(/^(https:\/\/i\.imgur\.com\/([A-Za-z0-9_-]+))(\.[a-zA-Z0-9]+)(.*)$/);
+                                if (m) {
+                                    const base = m[1];
+                                    const ext = m[3];
+                                    const rest = m[4] || '';
+                                    const suffix = 's';
+                                    url = `${base}${suffix}${ext}${rest}`;
+                                }
+                            }
+
+                            // Wrap with images.weserv.nl to enforce consistent thumbnail sizing for hosts that don't support suffixes
+                            try {
+                                const clean = url.replace(/^https?:\/\//i, '').replace(/^\//, '');
+                                const wrapped = 'https://images.weserv.nl/?url=' + encodeURIComponent(clean) + '&w=48&h=48&fit=cover&output=png';
+                                meta.tvgLogo = wrapped;
+                            } catch (e) {
+                                meta.tvgLogo = url;
+                            }
+                    } catch (e) {
+                        // In case of any parsing issue, keep original logo
+                    }
                 }
                 meta.groupTitle = groupTitleMatch ? groupTitleMatch[1] : '';
                 meta.name = name;
