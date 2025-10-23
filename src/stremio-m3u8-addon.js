@@ -21,7 +21,7 @@ function getStreams() {
 
 const manifest = {
     id: 'community.m3u8.streams',
-    version: '1.0.0',
+    version: '1.0.2',
     name: 'Kinabraytan TV',
     description: 'Auto-populated live streams from an M3U8 playlist',
     logo: 'https://raw.githubusercontent.com/kinabraytan/streams/onrender/assets/0054Psyduck.png', // Use GitHub-hosted Psyduck image
@@ -54,21 +54,35 @@ builder.defineCatalogHandler(({ type, id, extra }) => {
     return Promise.resolve({ metas });
 });
 
-// Stream handler: returns stream URL for playback
+// Stream handler: returns stream URL for playback with fallback options
 builder.defineStreamHandler(({ type, id }) => {
     if (type !== 'tv') return { streams: [] };
     const streams = getStreams();
     const streamId = id.replace('m3u8_', '');
     const stream = streams.find(s => s.id === streamId);
     if (!stream) return { streams: [] };
-    return Promise.resolve({
-        streams: [{
-            url: stream.url,
-            title: stream.name,
-            name: stream.name,
+
+    // Find alternative streams in the same group for fallback
+    const alternatives = streams.filter(s => s.group === stream.group && s.id !== streamId).slice(0, 2); // Up to 2 alternatives
+
+    const streamOptions = [{
+        url: stream.url,
+        title: stream.name,
+        name: stream.name,
+        isFree: true,
+    }];
+
+    // Add alternatives
+    alternatives.forEach(alt => {
+        streamOptions.push({
+            url: alt.url,
+            title: `${stream.name} (Alt)`,
+            name: `${stream.name} (Alt)`,
             isFree: true,
-        }]
+        });
     });
+
+    return Promise.resolve({ streams: streamOptions });
 });
 
 // Meta handler: returns metadata for each stream
