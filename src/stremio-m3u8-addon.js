@@ -22,15 +22,15 @@ function getStreams() {
 const manifest = {
     id: 'community.m3u8.streams',
     version: '1.0.0',
-    name: 'Kinabraytan Live M3U8 Streams',
-    description: 'Auto-populated live streams from M3U8 playlist.',
-    logo: 'https://i.imgur.com/LoQdSia.png',
+    name: 'Kinabraytan TV',
+    description: 'Auto-populated live streams from an M3U8 playlist',
+    logo: 'assets/psyduck.png',
     resources: ['catalog', 'stream', 'meta'],
     types: ['tv'],
     catalogs: [{
         type: 'tv',
         id: 'm3u8-live',
-        name: 'A1X TV',
+        name: 'KinA1X TV',
         extra: [{ name: 'search', isRequired: false }]
     }],
     idPrefixes: ['m3u8'],
