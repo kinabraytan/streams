@@ -70,6 +70,9 @@ builder.defineStreamHandler(({ type, id }) => {
         title: stream.name,
         name: stream.name,
         isFree: true,
+        behaviorHints: {
+            notWebReady: true,  // Indicates the stream may need special buffering for smooth playback
+        }
     }];
 
     // Add alternatives
