@@ -31,7 +31,7 @@ const manifest = {
     catalogs: [{
         type: 'tv',
         id: 'm3u8-live',
-        name: 'KinA1X TV',
+        name: 'Kinbraytan TV',
         extra: [{ name: 'search', isRequired: false }]
     }],
     idPrefixes: ['m3u8'],
