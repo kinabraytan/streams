@@ -25,6 +25,10 @@ function parseM3U8(filePath) {
                 meta.tvgId = tvgIdMatch ? tvgIdMatch[1] : '';
                 meta.tvgName = tvgNameMatch ? tvgNameMatch[1] : name;
                 meta.tvgLogo = tvgLogoMatch ? tvgLogoMatch[1] : '';
+                // Resize imgur logos for better UI fit
+                if (meta.tvgLogo.includes('imgur.com')) {
+                    meta.tvgLogo += '?size=small';
+                }
                 meta.groupTitle = groupTitleMatch ? groupTitleMatch[1] : '';
                 meta.name = name;
                 currentMeta = meta;
