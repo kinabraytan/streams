@@ -8,7 +8,7 @@ const { parseM3U8 } = require('./m3u8Parser');
 const PLAYLIST_PATH = path.join(__dirname, '../playlist');
 let streamsCache = [];
 let lastRefresh = 0;
-const REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
+const REFRESH_INTERVAL = 10 * 60 * 1000; // 10 minutes (increased for better caching)
 
 function getStreams() {
     const now = Date.now();
