@@ -21,9 +21,9 @@ function getStreams() {
 
 const manifest = {
     id: 'community.m3u8.streams',
-    version: '1.0.2',
+    version: '1.1.0',
     name: 'Kinabraytan TV',
-    description: 'Auto-populated live streams from an M3U8 playlist',
+    description: 'Auto-populated live streams from an M3U8 playlist with adaptive streaming support',
     logo: 'https://raw.githubusercontent.com/kinabraytan/streams/onrender/assets/0054Psyduck.png', // Use GitHub-hosted Psyduck image
     favicon: 'https://raw.githubusercontent.com/kinabraytan/streams/onrender/assets/0054Psyduck.png', // Also set favicon for Stremio landing page
     resources: ['catalog', 'stream', 'meta'],

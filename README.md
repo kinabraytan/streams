@@ -23,6 +23,19 @@
 
 ---
 
+## ⚡ Adaptive Streaming
+
+This addon includes **adaptive streaming support** for improved playback quality:
+
+- **Automatic Detection**: Detects HLS master playlists and serves them directly
+- **Proxy Synthesis**: For single-variant streams, creates adaptive masters with multiple bandwidth options
+- **Segment Proxying**: Proxies HLS segments with caching, retries, and rate-limiting
+- **Better Buffering**: Reduces buffering issues by optimizing stream delivery
+
+When playing a stream, Stremio will offer an "Adaptive (master)" option that uses these features for smoother playback.
+
+---
+
 ## 🛠️ Main Components
 
 <ul>
