@@ -51,7 +51,7 @@ function parseM3U8(filePath) {
                             // Wrap with images.weserv.nl to enforce consistent thumbnail sizing for hosts that don't support suffixes
                             try {
                                 const clean = url.replace(/^https?:\/\//i, '').replace(/^\//, '');
-                                const wrapped = 'https://images.weserv.nl/?url=' + encodeURIComponent(clean) + '&w=48&h=48&fit=cover&output=png';
+                                const wrapped = 'https://images.weserv.nl/?url=' + encodeURIComponent(clean) + '&w=32&h=32&fit=cover&output=png';
                                 meta.tvgLogo = wrapped;
                             } catch (e) {
                                 meta.tvgLogo = url;
