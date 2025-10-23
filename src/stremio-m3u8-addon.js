@@ -24,7 +24,8 @@ const manifest = {
     version: '1.0.0',
     name: 'Kinabraytan TV',
     description: 'Auto-populated live streams from an M3U8 playlist',
-    logo: 'assets/psyduck.png',
+    logo: 'https://raw.githubusercontent.com/kinabraytan/streams/onrender/assets/0054Psyduck.png', // Use GitHub-hosted Psyduck image
+    favicon: 'https://raw.githubusercontent.com/kinabraytan/streams/onrender/assets/0054Psyduck.png', // Also set favicon for Stremio landing page
     resources: ['catalog', 'stream', 'meta'],
     types: ['tv'],
     catalogs: [{
